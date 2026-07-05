@@ -1,0 +1,243 @@
+@import 'tailwindcss';
+
+@theme {
+	/* Workstation / Anodize Alüminyum Paleti (Resimdeki Birebir Tonlar) */
+	--color-arsenal-bg: #e3e3e3; /* Ana Zemin (Mat Açık Endüstriyel Gri) */
+	--color-arsenal-surface: #d6d6d6; /* Yan Paneller ve Kolonlar (Bir tık koyu gri) */
+	--color-arsenal-card: #c8c8c8; /* Kartlar ve Buton Blokları (Opak Mat Gri) */
+	--color-arsenal-border: #a3a3a3; /* Keskin 1px Mühendislik Çerçevesi */
+	--color-arsenal-border-focus: #555555; /* Aktif / Seçili Çerçeve */
+
+	/* Kontrast Renkleri */
+	--color-arsenal-text: #111111; /* Tam Karbon Siyahı (Göz yormayan maksimum netlik) */
+	--color-arsenal-muted: #5a5a5a; /* İkincil Bilgi Metinleri */
+
+	/* Konsol ve Vurgu Renkleri (Tüm Taktiksel / HUD Durumlar Eksiksiz!) */
+	--color-arsenal-console: #141414; /* Kapkara Alt/Üst Telemetri Barı */
+	--color-arsenal-lime: #e2f163; /* İmza: Soluk Taktiksel Limon Sarısı / Yeşili */
+	--color-arsenal-amber: #f59e0b; /* Uyarı / Gecikme / Beklemede */
+	--color-arsenal-red: #ef4444; /* Hata / Durdurma / Kritik Tehdit */
+	--color-arsenal-cyan: #0284c7; /* EKSİK GİDERİLDİ: Blueprint / GDD / Telemetri Mavisi */
+	--color-arsenal-green: #16a34a; /* EKSİK GİDERİLDİ: Tamamlandı (Done) / Stabil Yeşili */
+
+	--font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+@layer base {
+	body {
+		/* Sıfır gölge, tamamen düz ve opak arkaplan */
+		@apply min-h-screen bg-arsenal-bg font-sans text-arsenal-text antialiased selection:bg-arsenal-console selection:text-arsenal-lime;
+	}
+}
+
+@layer components {
+	/* --- 1. LAYOUT --- */
+	.main-container {
+		@apply mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8;
+	}
+
+	/* --- 2. WORKSTATION KART YAPILARI (TAMAMEN OPAK VE DÜZ) --- */
+	/* Resimdeki sol ve sağ kolonlardaki "01-Engine ASSY" blokları gibi */
+	.general-card,
+	.general-card-interactive {
+		@apply rounded-none border border-arsenal-border bg-arsenal-card p-4 transition-none;
+	}
+
+	.general-card-interactive {
+		@apply cursor-pointer hover:border-arsenal-text hover:bg-[#B8B8B8];
+	}
+
+	/* --- 3. BUTONLAR (KESKİN VE ENDÜSTRİYEL) --- */
+	/* Resimdeki sağ üstteki siyah "Actions" veya alt bardaki "Start" butonu tarzı */
+	.btn-tactical {
+		@apply inline-flex cursor-pointer items-center justify-center rounded-none border border-transparent bg-arsenal-console px-5 py-2 font-mono text-xs font-bold tracking-widest text-white uppercase transition-none select-none hover:bg-black;
+	}
+
+	/* Meşhur Soluk Limon/Sarı Aksiyon Butonu */
+	.btn-lime {
+		@apply inline-flex cursor-pointer items-center justify-center rounded-none border border-black/20 bg-arsenal-lime px-6 py-2 font-mono text-xs font-bold tracking-widest text-arsenal-console uppercase transition-none select-none hover:bg-[#D4E350];
+	}
+
+	.btn-primary {
+		@apply inline-flex cursor-pointer items-center justify-center rounded-none border border-arsenal-border bg-arsenal-surface px-4 py-2 font-mono text-xs tracking-wider text-arsenal-text uppercase transition-none select-none hover:border-arsenal-text hover:bg-arsenal-card;
+	}
+
+	.btn-danger {
+		@apply inline-flex cursor-pointer items-center justify-center rounded-none border border-arsenal-red bg-transparent px-4 py-2 font-mono text-xs tracking-wider text-arsenal-red uppercase transition-none select-none hover:bg-arsenal-red hover:text-white;
+	}
+
+	/* --- 4. TABLO VE LİSTE YAPILARI (CAD EKRANI TARZI) --- */
+	.table-wrapper {
+		@apply w-full overflow-x-auto rounded-none border border-arsenal-border bg-arsenal-surface;
+	}
+
+	.tactical-table {
+		@apply w-full border-collapse text-left font-mono text-sm;
+	}
+
+	.tactical-table th {
+		@apply border-b border-arsenal-border bg-[#C8C8C8] p-3 text-xs font-bold tracking-wider text-arsenal-text uppercase select-none;
+	}
+
+	.tactical-table td {
+		@apply border-b border-arsenal-border/60 p-3 font-medium text-arsenal-text;
+	}
+
+	.tactical-table tr:hover td {
+		@apply bg-[#CCCCCC];
+	}
+
+	/* --- 5. TİPOGRAFİ --- */
+	.heading-tactical {
+		@apply my-3 font-mono text-base font-bold tracking-widest text-arsenal-text uppercase md:text-lg;
+	}
+
+	.text-label {
+		@apply mb-1 block font-mono text-[11px] font-semibold tracking-wider text-arsenal-muted uppercase;
+	}
+
+	/* --- 6. WORKSTATION ROZETLERİ (SEMANTİK BADGES) --- */
+	.badge-neutral {
+		@apply inline-flex items-center gap-1.5 rounded-none border border-arsenal-border bg-arsenal-surface px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider text-arsenal-text uppercase select-none;
+	}
+
+	.badge-console {
+		@apply inline-flex items-center gap-1.5 rounded-none border border-zinc-700 bg-arsenal-console px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider text-arsenal-lime uppercase select-none;
+	}
+
+	.badge-red {
+		@apply inline-flex items-center gap-1.5 rounded-none border border-red-500/40 bg-red-500/10 px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider text-red-700 uppercase select-none;
+	}
+
+	.badge-amber {
+		@apply inline-flex items-center gap-1.5 rounded-none border border-amber-500/40 bg-amber-500/10 px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider text-amber-800 uppercase select-none;
+	}
+
+	.badge-green {
+		@apply inline-flex items-center gap-1.5 rounded-none border border-emerald-500/40 bg-emerald-500/10 px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider text-emerald-800 uppercase select-none;
+	}
+
+	.badge-cyan {
+		@apply inline-flex items-center gap-1.5 rounded-none border border-sky-500/40 bg-sky-500/10 px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider text-sky-800 uppercase select-none;
+	}
+
+	/* --- 7. LED / DURUM NOKTALARI --- */
+	.status-dot-lime {
+		@apply inline-block h-2 w-2 rounded-full bg-arsenal-lime;
+	}
+	.status-dot-red {
+		@apply inline-block h-2 w-2 rounded-full bg-arsenal-red;
+	}
+
+	/* 1. INPUTLAR (CAD / Mühendislik Girdileri) */
+	.input-tactical {
+		@apply w-full rounded-none border border-arsenal-border bg-white px-3 py-2 font-mono text-xs text-arsenal-text transition-none placeholder:text-arsenal-muted/70 focus:border-arsenal-text focus:bg-[#F8F8F8] focus:outline-none;
+	}
+
+	/* 2. MODAL ARKA PLANI (Karartma Katmanı) */
+	.modal-backdrop {
+		@apply fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-xs select-none;
+	}
+
+	/* 3. MODAL KUTUSU (Mat Alüminyum Pencere) */
+	.modal-panel {
+		@apply relative w-full max-w-lg rounded-none border border-arsenal-text bg-arsenal-surface p-6 font-sans shadow-2xl;
+	}
+
+	/* 4. MODAL BAŞLIK BARI */
+	.modal-header {
+		@apply mb-4 flex items-center justify-between border-b border-arsenal-border pb-3 font-mono text-xs font-bold tracking-wider text-arsenal-text uppercase md:text-sm;
+	}
+
+	/* ==========================================================================
+     8. WORKSTATION AĞAÇ & VERİTABANI EŞLEŞME SINIFLARI (DB MAPPED UTILITIES)
+     ========================================================================== */
+
+	/* --- 1. ACCORDION KART YAPILARI --- */
+	.accordion-card {
+		@apply block w-full cursor-pointer rounded-none border border-arsenal-border bg-arsenal-card p-5 text-left transition-none select-none hover:border-arsenal-text hover:bg-[#B8B8B8];
+	}
+
+	.accordion-card-active {
+		@apply block w-full rounded-none border-2 border-black bg-arsenal-surface p-5 text-left shadow-sm transition-none select-none;
+	}
+
+	/* --- 2. CANLI HESAPLANAN PROGRESS BAR --- */
+	.progress-track {
+		@apply my-2.5 h-2 w-full overflow-hidden rounded-none border border-arsenal-border bg-[#C8C8C8];
+	}
+
+	.progress-fill {
+		@apply h-full border-r border-black bg-arsenal-lime transition-all duration-300;
+	}
+
+	/* --- 3. KILAVUZ ÇİZGİLER (TREE WIRES - DB BAĞLANTILARI) --- */
+	/* gdd_node_id varsa: Siber Mavi Tasarım Referans Çizgisi */
+	.tree-wire-cyan {
+		@apply mt-3 space-y-2 border-l-2 border-dashed border-arsenal-cyan bg-white/40 py-1 pl-3.5;
+	}
+
+	/* tasks listesi için: Limon Yeşili / Siyah Operasyon Çizgisi */
+	.tree-wire-lime {
+		@apply mt-3 space-y-2 border-l-2 border-dashed border-black bg-white/40 py-1 pl-3.5;
+	}
+
+	/* --- 4. ALT GÖREV / DÜĞÜM SATIRLARI (TREE ITEMS) --- */
+	.tree-item {
+		@apply flex items-center justify-between border border-arsenal-border/60 bg-arsenal-card/80 p-2.5 font-mono text-xs transition-none select-none hover:border-black hover:bg-white;
+	}
+
+	/* --- 5. VERİTABANI ÖNCELİK ROZETLERİ (MoSCoW PRIORITY BADGES) --- */
+	/* priority: 'must' -> Kritik Kırmızı */
+	.priority-must {
+		@apply inline-block border border-black bg-arsenal-red px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-wider text-white uppercase;
+	}
+	/* priority: 'should' -> Uyarı Kehribarı */
+	.priority-should {
+		@apply inline-block border border-black bg-arsenal-amber px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-wider text-black uppercase;
+	}
+	/* priority: 'could' -> Standart Siber Mavi */
+	.priority-could {
+		@apply inline-block border border-black bg-arsenal-cyan px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-wider text-white uppercase;
+	}
+	/* priority: 'wont' -> Pasif Gri */
+	.priority-wont {
+		@apply inline-block border border-black bg-[#A3A3A3] px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-wider text-black uppercase line-through;
+	}
+
+	/* ==========================================================================
+     9. WORKSTATION KANBAN BOARD (TASKS MODULE UTILITIES)
+     ========================================================================== */
+
+	/* --- 1. KANBAN TAHTASI VE SÜTUN YAPISI --- */
+	/* 4 Kolonlu (Icebox, Backlog, In Progress, Done) ana taşıyıcı ızgara */
+	.kanban-board {
+		@apply grid w-full grid-cols-1 items-start gap-4 pb-8 select-none sm:grid-cols-2 lg:grid-cols-4;
+	}
+
+	/* Her bir sütunun kasası: Mat alüminyum yan panel rengi, dikey scroll */
+	.kanban-col {
+		@apply flex max-h-[calc(100vh-180px)] min-h-[480px] flex-col rounded-none border border-arsenal-border bg-arsenal-surface p-3;
+	}
+
+	/* Sütun Başlığı: Keskin alt çizgi, monospaced font */
+	.kanban-col-header {
+		@apply mb-3 flex shrink-0 items-center justify-between border-b border-arsenal-border/80 pb-2.5 font-mono text-xs font-bold tracking-wider text-arsenal-text uppercase select-none;
+	}
+
+	/* Kartların sıralandığı kaydırılabilir iç alan */
+	.kanban-col-body {
+		@apply min-h-[100px] flex-1 space-y-2.5 overflow-y-auto pr-1;
+	}
+
+	/* --- 2. KANBAN GÖREV KARTLARI (SHARP TASK CARDS) --- */
+	/* Standart Görev Kartı: İmleç tutma hissi verir (cursor-grab), üzerine gelince beyazlaşır */
+	.kanban-card {
+		@apply relative block w-full cursor-grab rounded-none border border-arsenal-border bg-arsenal-card p-3 text-left font-sans shadow-2xs transition-none select-none hover:border-black hover:bg-white active:cursor-grabbing;
+	}
+
+	/* Sürükleme anında (veya aktif seçiliyken) kartın bürüneceği taktiksel form */
+	.kanban-card-active {
+		@apply z-50 rotate-1 border-2 border-black bg-arsenal-lime/20 opacity-95 shadow-md;
+	}
+}
