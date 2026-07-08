@@ -27,6 +27,12 @@
 	});
 </script>
 
+
+<svelte:head>
+    <title>TASKS // {appState.project?.title || 'KANBAN'}</title>
+    <meta name="description" content="Tactical task queue and Kanban execution board. Monitor engineering workflows, sprint backlog, and active pipelines." />
+</svelte:head>
+
 {#if appState.loading}
 	<div class="flex min-h-screen items-center justify-center bg-slate-950 text-white font-sans">
 		<div class="flex flex-col items-center gap-3">

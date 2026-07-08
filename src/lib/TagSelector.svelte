@@ -43,7 +43,7 @@
         if (exists) {
             selectedTags = selectedTags.filter(t => t.title !== tag.title);
         } else {
-            selectedTags = [...selectedTags, { title: tag.title, icon: tag.icon, color: tag.color }];
+            selectedTags = [...selectedTags, { id: tag.id || tag.title, title: tag.title, icon: tag.icon, color: tag.color }];
         }
     }
 

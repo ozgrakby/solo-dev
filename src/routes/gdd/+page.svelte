@@ -27,6 +27,11 @@
 	});
 </script>
 
+<svelte:head>
+    <title>GDD // {appState.project?.title || 'UNASSIGNED'}</title>
+    <meta name="description" content="Technical Game Design Document and specifications for {appState.project?.title || 'project'}." />
+</svelte:head>
+
 {#if appState.loading}
 	<div class="flex min-h-screen items-center justify-center bg-slate-950 text-white font-sans">
 		<div class="flex flex-col items-center gap-3">

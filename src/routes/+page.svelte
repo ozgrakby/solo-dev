@@ -4,6 +4,11 @@
   import { Milestone, Kanban, FileText, GitCommit, GitBranch, Activity, Terminal, ArrowUpRight } from 'lucide-svelte';
 </script>
 
+<svelte:head>
+    <title>WORKSPACE // {appState.project?.title || 'OVERVIEW'}</title>
+    <meta name="description" content="Dashboard for {appState.project?.title || 'project'}. Monitor active tasks, milestone progress, and game design blueprints." />
+</svelte:head>
+
 <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 font-sans select-none">
   
   <div class="mb-8 border-b border-arsenal-border pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4">

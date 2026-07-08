@@ -84,50 +84,69 @@
 	<div
 		class="min-h-screen flex flex-col bg-arsenal-bg text-arsenal-text font-sans antialiased selection:bg-arsenal-console selection:text-arsenal-lime"
 	>
+		<!-- ======================================================================= -->
+		<!-- MOBİL VE MASAÜSTÜNE TAM UYUMLU ESNEK NAVBAR (min-h-14 & flex-wrap) -->
+		<!-- ======================================================================= -->
 		<header
-			class="sticky top-0 z-50 flex h-14 items-center justify-between border-b border-arsenal-border bg-arsenal-surface px-4 sm:px-6 select-none"
+			class="sticky top-0 z-50 flex min-h-14 flex-wrap items-center justify-between gap-2 border-b border-arsenal-border bg-arsenal-surface px-3 py-2 sm:px-6 select-none shadow-2xs"
 		>
-			<button onclick={() => handleButtonClick()} class="flex items-center gap-4 font-mono">
+			<!-- 1. SOL: LOGO VE ANA SAYFA BUTONU -->
+			<button
+				onclick={() => handleButtonClick()}
+				class="flex items-center gap-2 font-mono shrink-0 cursor-pointer"
+			>
 				<div
-					class="flex items-center gap-1.5 font-bold tracking-tight text-base uppercase hover:text-arsenal-border-focus"
+					class="flex items-center gap-1.5 font-bold tracking-tight text-sm sm:text-base uppercase hover:text-arsenal-border-focus"
 				>
 					<span>SOLO DEV</span>
-					<span class="text-xs font-normal text-arsenal-muted">PANEL</span>
+					<!-- Mobilde "PANEL" yazısını gizle ki yer açılsın -->
+					<span class="text-xs font-normal text-arsenal-muted hidden sm:inline">PANEL</span>
 				</div>
 			</button>
 
-			<div class="flex items-center gap-2">
+			<!-- 2. ORTA: AKTİF PROJE ROZETİ VE SWITCH BUTONU -->
+			<div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
 				<div
-					class="flex items-center gap-2 bg-arsenal-card px-3 py-1 text-xs font-mono font-bold text-arsenal-text border border-arsenal-border"
+					class="flex items-center gap-1.5 bg-arsenal-card px-2 sm:px-3 py-1 text-xs font-mono font-bold text-arsenal-text border border-arsenal-border max-w-[140px] sm:max-w-none"
 				>
 					<NavIcon class="w-3.5 h-3.5 text-black shrink-0" />
-					<span class="tracking-wider uppercase">{appState.project?.title}</span>
-					<span class="text-[10px] text-arsenal-muted border-l border-arsenal-border pl-1.5">
+					<span class="tracking-wider uppercase truncate">{appState.project?.title}</span>
+					<span
+						class="text-[10px] text-arsenal-muted border-l border-arsenal-border pl-1.5 shrink-0"
+					>
 						{appState.project.version || 'v0.1'}
 					</span>
 				</div>
 
+				<!-- İŞTE SENİN İSTEDİĞİN O SWITCH BUTONU (LUCIDE İKONLU!) -->
 				<button
 					onclick={() => {
 						appState.project = null;
 						localStorage.removeItem('active_project');
 					}}
 					title="Switch Project"
-					class="btn-primary !py-1 !px-2 text-[10px]"
+					class="btn-primary !py-1 !px-2 sm:!px-2.5 text-[10px] flex items-center gap-1 cursor-pointer shrink-0 font-bold"
 				>
-					↔ DEĞİŞTİR
+					<Icons.FolderGit2 class="w-3 h-3 text-arsenal-muted shrink-0" />
+					<span>SWITCH</span>
 				</button>
 			</div>
 
-			<div class="flex items-center gap-4 text-xs font-mono">
-				<div class="hidden sm:block text-right">
-					<span class="font-bold truncate max-w-[120px] inline-block"
+			<!-- 3. SAĞ: KULLANICI ADI (SADECE BÜYÜK EKRANDA) VE LOGOUT -->
+			<div class="flex items-center gap-3 text-xs font-mono shrink-0">
+				<div class="hidden md:block text-right">
+					<span class="font-bold truncate max-w-[120px] inline-block text-arsenal-muted"
 						>{appState.session.user.email?.split('@')[0].toUpperCase()}</span
 					>
 				</div>
 
-				<button onclick={handleLogout} class="btn-tactical !py-1 !px-3 text-[10px]">
-					LOGOUT
+				<button
+					onclick={handleLogout}
+					title="Terminate Session // System Logout"
+					class="btn-primary !py-1 !px-2.5 sm:!px-3 text-[10px] cursor-pointer font-bold shrink-0 flex items-center gap-1.5 !border-arsenal-border hover:!border-red-600 hover:!bg-red-600 hover:!text-white transition-none group"
+				>
+					<Icons.LogOut class="w-3 h-3 text-arsenal-muted group-hover:text-white shrink-0" />
+					<span>LOGOUT</span>
 				</button>
 			</div>
 		</header>

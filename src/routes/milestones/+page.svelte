@@ -27,6 +27,11 @@
 	});
 </script>
 
+<svelte:head>
+    <title>ROADMAP // {appState.project?.title || 'MILESTONES'}</title>
+    <meta name="description" content="Production roadmap and milestone tracking directory." />
+</svelte:head>
+
 {#if appState.loading}
 	<div class="flex min-h-screen items-center justify-center bg-slate-950 text-white font-sans">
 		<div class="flex flex-col items-center gap-3">
